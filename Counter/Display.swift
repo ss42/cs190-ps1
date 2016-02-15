@@ -156,10 +156,18 @@ class Display: UIView {
         let segmentHeight = bounds.size.height
         let xOrigin = bounds.origin.x
         let yOrigin = bounds.origin.y
-        // This needs re-doing. The segmentWidth is the whole view width. It should only be one-fifteenth of that.
-        let sscRect = CGRectMake(xOrigin, yOrigin, bounds.size.width, segmentHeight)
+      
         // This needs completing. It only draws one SSC. It needs to be put in a loop to show all 15 SSCs.
-        drawSSC(context, sscRect:sscRect, mask:segmentMasks[8])
+        var multiplier:CGFloat = 0
+        let shiftOver = bounds.size.width/15
+
+        for i in masks
+        {
+            let sscRect = CGRectMake(xOrigin + (multiplier * shiftOver), yOrigin, bounds.size.width/15, segmentHeight)
+            drawSSC(context, sscRect:sscRect, mask:i)
+            multiplier++
+        }
+        
     }
 
 }
